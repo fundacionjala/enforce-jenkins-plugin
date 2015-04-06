@@ -1,0 +1,107 @@
+<!--
+ Copyright (c) Fundacion Jala. All rights reserved.
+ Licensed under the MIT license. See LICENSE file in the project root for full license information.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:local="local">
+
+
+    <j:set var="project" value="${from.getProject()}"/>
+    <j:set var="pieChart" value="${from.getPieChartData(project.getLastSuccessfulBuild())}"/>
+
+    <j:if test="${from.isCoverageVisibleOnProjectDashboard()}">
+    <j:set var="pieChartTitle" value="${pieChart.getTitle()}"/>
+    <j:set var="data" value="${pieChart.getDataForJavascript(pieChart.getData())}"/>
+    <j:set var="coverageData" value="${pieChart.getDataForJavascript(pieChart.getCoverageData())}"/>
+    <j:set var="coverageValue" value="${from.getPercentage()}"/>
+    <j:set var="coveredLines" value="{{coveredLines}}"/>
+    <j:set var="uncoveredLines" value="{{uncoveredLines}}"/>
+    <j:set var="notCoveragePercentage" value="${from.getPercentageNotCovered()}"/>
+    <j:set var="colorCoverage" value="${from.getPercentageColor()}"/>
+
+    <script type="text/javascript" src="${rootURL}/plugin/enforce-jenkins-plugin/js/angular.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/enforce-jenkins-plugin/js/ng-google-chart.js"></script>
+    <style type="text/css">
+    .coverage-value{
+             font-family: times, Times New Roman, times-roman, georgia, serif;
+              line-height: 1em;
+              color: #089913;
+              font-size: 40px;
+              margin-top: 60px;
+              margin-left: 30px;
+          }
+         .coverage-detail{
+            font-size: 12px;
+    	    font-family: Georgia, 'Times New Roman', serif;
+    	    color: #000;
+    	    text-align: center;
+            font-weight: 100;
+         }
+          #wrapper {
+            margin-right: 400px;
+          }
+          #content {
+            float: left;
+            width: 100%;
+          }
+          #sidebar {
+            float: right;
+            width: 400px;
+            margin-right: -400px;
+          }
+          #cleared {
+            clear: both;
+          }
+    </style>
+    <script type="text/javascript">
+        var app = angular.module('enforce', [ 'googlechart' ]);
+
+        app.controller('pieChartController', function($$scope) {
+            var pieChart = {};
+            pieChart.type = "PieChart";
+            pieChart.data = ${data};
+            pieChart.options = {
+              displayExactValues: true,
+              width: 400,
+              height: 240,
+              is3D: true,
+              slices: {
+                  0: { color: '#d2322d' },
+                  1: { color: '#ed9c28'},
+                  2: { color: '#2aabd2'},
+                  4: { color: '#5cb85c'}
+              },
+              chartArea: {left:0, right:0,top:20,bottom:0,height:"80%", width:"100%"}
+            };
+
+            var coverageData = ${coverageData};
+            var coveredLines;
+            var uncoveredLines;
+            if(coverageData){
+                coveredLines = coverageData[1][1];
+                uncoveredLines = coverageData[2][1];
+                $$scope.coveredLines = coveredLines;
+                $$scope.uncoveredLines = uncoveredLines;
+
+            }
+            $$scope.chart = pieChart;
+
+        });
+    </script>
+    <div align="right" ng-app="enforce">
+        <h3 align="center" >${pieChartTitle}</h3>
+        <div ng-controller="pieChartController" id="wrapper">
+          <div id="content">
+                    <h3 class="coverage-value" align="center" style="color: ${colorCoverage}" >${coverageValue}%</h3>
+                    <h5 class="coverage-detail">Lines covered: ${coveredLines} (${coverageValue}%)</h5>
+                    <h5 class="coverage-detail">Lines not covered: ${uncoveredLines} (${notCoveragePercentage}%)</h5>
+          </div>
+              <div id="sidebar">
+                        <div google-chart="this" chart="chart" style="border:0px inset black;padding:0;width:400px">
+                        </div>
+              </div>
+          <div id="cleared"></div>
+        </div>
+    </div>
+    </j:if>
+</j:jelly>
