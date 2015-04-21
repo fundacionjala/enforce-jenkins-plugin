@@ -24,6 +24,8 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
     private final String jsonFileName;
     private final double minimumCoverage;
     private PieChartData pieChartData;
+    private int[] range;
+    private String[] color;
 
     /**
      * Creates an additional action for Enforce jenkins plugin
@@ -36,6 +38,10 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
         this.jsonFileName = enforcePublisher.getJsonFileName();
         this.minimumCoverage = enforcePublisher.getMinimumCoverage();
         this.pieChartData = new PieChartData();
+
+        this.range =  new int[]{0, 74, 79, 94, 100};
+        this.color = new String[]{"#d2322d","#ed9c28","#2aabd2","#5cb85c"};
+
     }
 
     /**
@@ -59,11 +65,12 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
      *
      * @return a string that represents a color name for css file
      */
+
     public String getPercentageColor() {
-        String percentageColor = Constants.COLOR_GREEN;
-        if (isCoverageVisibleOnProjectDashboard()) {
-            if (pieChartData.getPercentage() < this.minimumCoverage) {
-                percentageColor = Constants.COLOR_RED;
+        String percentageColor = "#5cb85c";
+        for (int i = 0; i < range.length - 1; i++) {
+            if(this.range[i] <= pieChartData.getPercentage() && this.range[i+1] > pieChartData.getPercentage() ) {
+                percentageColor = this.color[i];
             }
         }
         return percentageColor;
