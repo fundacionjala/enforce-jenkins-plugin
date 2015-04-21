@@ -28,11 +28,21 @@ public class PieChartDataTest {
         Object[][] coverageData = new Object[][]{titleCoverageData, covered, notCovered};
         pieChartData.setCoverageData(coverageData);
         double percentage = pieChartData.getRoundedPercentage(2);
-        System.out.println(percentage);
         double expectedNumber = 91.75;
         Assert.assertEquals(expectedNumber, percentage, 0);
     }
 
+    @Test
+    public void testGetZeroWhenCoveredAndNotCoveredLinesAreZeros() {
+        String[] titleCoverageData = new String[]{"Lines", "Number"};
+        Object[] covered = new Object[]{"Covered", 0};
+        Object[] notCovered = new Object[]{"Not Covered", 0};
+        Object[][] coverageData = new Object[][]{titleCoverageData, covered, notCovered};
+        pieChartData.setCoverageData(coverageData);
+        double percentage = pieChartData.getRoundedPercentage(2);
+        double expectedNumber = 0;
+        Assert.assertEquals(expectedNumber, percentage, 0);
+    }
 
     @Test
     public void testDataForJavascript_shouldGetCoverageData() {
