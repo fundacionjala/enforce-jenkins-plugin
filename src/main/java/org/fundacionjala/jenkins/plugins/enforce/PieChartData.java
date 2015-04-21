@@ -61,7 +61,7 @@ public class PieChartData {
             Double uncoveredLines = coverageData[2][1] instanceof Double ? (Double) coverageData[2][1] :
                     coverageData[2][1] instanceof Integer ? (Integer) coverageData[2][1] : 0;
             Double totalLines = coveredLines + uncoveredLines;
-            percentage = (coveredLines * 100.0f) / totalLines;
+            percentage = totalLines != 0? (coveredLines * 100.0f) / totalLines:0;
         }
 
         return percentage;
