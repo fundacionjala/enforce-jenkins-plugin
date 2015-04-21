@@ -93,11 +93,11 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
     }
 
     public String getIconFileName() {
-        return Constants.ACTION_ICON_FILE_NAME;
+        return null;
     }
 
     public String getDisplayName() {
-        return Constants.ACTION_DISPLAY_NAME;
+        return "";
     }
 
     public String getUrlName() {
