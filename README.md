@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin.svg?branch=master)](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin)
+
 # EnForce Jenkins Plugin
 
 This plugin allows you to capture code coverage information from [EnForce gradle plugin](https://github.com/fundacionjala/enforce-gradle-plugin).
