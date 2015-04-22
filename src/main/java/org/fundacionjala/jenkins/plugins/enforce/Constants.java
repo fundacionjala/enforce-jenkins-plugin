@@ -9,8 +9,8 @@ package org.fundacionjala.jenkins.plugins.enforce;
  * Contains common constants
  */
 public class Constants {
-    public static final String ACTION_ICON_FILE_NAME = "graph.gif";
-    public static final String ACTION_DISPLAY_NAME = "EnForce Coverage Report";
+    public static final String ACTION_ICON_FILE_NAME = null;
+    public static final String ACTION_DISPLAY_NAME = "";
     public static final String ACTION_URL_NAME = "coverage";
     public static final String ACTION_PAGE_COVERAGE_DETAILS = "pagecoveragedetails";
     public static final String PUBLISHER_MESSAGE = "Publishing coverage results from";

@@ -1,0 +1,10 @@
+# Files #
+*.jar
+*.war
+*.ear
+*.iml
+*.hpi
+# Folders #
+.idea/
+build/
+target/
