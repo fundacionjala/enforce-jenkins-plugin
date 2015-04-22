@@ -67,12 +67,13 @@
 
 
         #content-data {
-            width: 650px;
-
+            width: 500px;
+            margin: 62px 0;
         }
 
         #title-coverage {
-            font-size: 28px;
+            font-size: 1.2em;
+            font-weight: bold;
         }
 
         #content-total-coverage {
