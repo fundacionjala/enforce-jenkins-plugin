@@ -16,6 +16,13 @@
     <j:set var="coverageValue" value="${from.getPercentage()}"/>
     <j:set var="coveredLines" value="{{coveredLines}}"/>
     <j:set var="uncoveredLines" value="{{uncoveredLines}}"/>
+
+    <j:set var="valueFileDanger" value="{{valueFileDanger}}"/>
+    <j:set var="valueFileRisk" value="{{valueFileRisk}}"/>
+    <j:set var="valueFileAcceptable" value="{{valueFileAcceptable}}"/>
+    <j:set var="valueFileSafe" value="{{valueFileSafe}}"/>
+
+
     <j:set var="notCoveragePercentage" value="${from.getPercentageNotCovered()}"/>
     <j:set var="colorCoverage" value="${from.getPercentageColor()}"/>
 
@@ -60,14 +67,12 @@
 
 
         #content-data {
-            width: 500px;
-            margin: 50px 0;
-            padding-bottom: 17px;
+            width: 650px;
+
         }
 
         #title-coverage {
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 28px;
         }
 
         #content-total-coverage {
@@ -312,6 +317,17 @@
 
             }
             $$scope.chart = pieChart;
+
+            $$scope.valueFileDanger = ${data[1][1]};
+            $$scope.valueFileRisk = ${data[2][1]};
+            $$scope.valueFileAcceptable = ${data[3][1]};
+            $$scope.valueFileSafe = ${data[4][1]};
+
+            $$scope.valueFileDanger = parseInt($$scope.valueFileDanger);
+            $$scope.valueFileRisk = parseInt($$scope.valueFileRisk);
+            $$scope.valueFileAcceptable = parseInt($$scope.valueFileAcceptable);
+            $$scope.valueFileSafe = parseInt($$scope.valueFileSafe);
+
         });
     </script>
 
@@ -345,24 +361,28 @@
             <div class="content-category">
                 <div class="frame-category range-danger"></div>
                 <div class="frame-label"><label class="lb-frame-1">Danger</label></div>
-                <div class="frame-label"><label class="lb-frame-2">${data[1][1]} Files</label></div>
+                <div class="frame-label"><label class="lb-frame-2">${valueFileDanger} Files</label></div>
             </div>
             <div class="content-category">
                 <div class="frame-category range-risk"></div>
                 <div class="frame-label"><label class="lb-frame-1">Risk</label></div>
-                <div class="frame-label"><label class="lb-frame-2">${data[2][1]} Files</label></div>
+                <div class="frame-label"><label class="lb-frame-2">${valueFileRisk} Files</label></div>
             </div>
             <div class="content-category">
                 <div class="frame-category range-acceptable"></div>
                 <div class="frame-label"><label class="lb-frame-1">Acceptable</label></div>
-                <div class="frame-label"><label class="lb-frame-2">${data[3][1]} Files</label></div>
+                <div class="frame-label"><label class="lb-frame-2">${valueFileAcceptable} Files</label></div>
             </div>
             <div class="content-category">
                 <div class="frame-category range-safe"></div>
                 <div class="frame-label"><label class="lb-frame-1">Safe</label></div>
-                <div class="frame-label"><label class="lb-frame-2">${data[4][1]} Files</label></div>
+                <div class="frame-label"><label class="lb-frame-2">${valueFileSafe} Files</label></div>
             </div>
         </div>
     </div>
+
+
+
+
     </j:if>
 </j:jelly>
