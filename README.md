@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin.svg?branch=master)](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin)
+[![Build Status](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin.svg?branch=master)](https://travis-ci.org/fundacionjala/enforce-jenkins-plugin) [![license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/fundacionjala/enforce-jenkins-plugin/blob/master/LICENSE)
 
 # EnForce Jenkins Plugin
 
