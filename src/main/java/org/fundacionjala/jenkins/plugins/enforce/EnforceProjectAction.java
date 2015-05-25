@@ -33,8 +33,7 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
      * @param project base implementation of Jobs
      */
     public EnforceProjectAction(AbstractProject<?, ?> project) {
-        this.project = project;
-        project.build
+        this.project = project;        
         EnforcePublisher enforcePublisher = (EnforcePublisher) project.getPublishersList().get(EnforcePublisher.DESCRIPTOR);
         this.jsonFileName = enforcePublisher.getJsonFileName();
         this.minimumCoverage = enforcePublisher.getMinimumCoverage();
