@@ -33,13 +33,13 @@ public class EnforceProjectAction extends Actionable implements ProminentProject
      * @param project base implementation of Jobs
      */
     public EnforceProjectAction(AbstractProject<?, ?> project) {
-        this.project = project;
+        this.project = project;        
         EnforcePublisher enforcePublisher = (EnforcePublisher) project.getPublishersList().get(EnforcePublisher.DESCRIPTOR);
         this.jsonFileName = enforcePublisher.getJsonFileName();
         this.minimumCoverage = enforcePublisher.getMinimumCoverage();
         this.pieChartData = new PieChartData();
 
-        this.range =  new int[]{0, 74, 79, 94, 100};
+        this.range =  new int[]{0, 75, 80, 95, 100};
         this.color = new String[]{"#d2322d","#ed9c28","#2aabd2","#5cb85c"};
 
     }
