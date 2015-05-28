@@ -60,11 +60,11 @@
             clear: both;
         }
         #content-data {
-            width: 650px;
-
+            width: 500px;
+            margin: 62px 0px;
         }
         #title-coverage {
-            font-size: 28px;
+            font-size: 1.2em;
         }
         #content-total-coverage {
             width: 100%;
