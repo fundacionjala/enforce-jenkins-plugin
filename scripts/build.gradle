@@ -58,8 +58,8 @@ publishing {
 }*/
 
 bintray {
-    user = "ruiz-ac"
-    key = "50d4486188d0dd9580d3cc8b64c7488f4a156e0b"
+    user = "$System.env.BINTRAY_USER_NAME"
+    key = "$System.env.BINTRAY_API_KEY"
 
     publications = ['mavenJava']
          filesSpec {
