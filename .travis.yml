@@ -1,5 +1,6 @@
 language: java
-
+before_install:
+  - sudo chmod +x run-publish.sh
 jdk: oraclejdk7
 
 after_success: "./run-publish.sh"
