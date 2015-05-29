@@ -1,0 +1,83 @@
+/*
+ * Copyright (c) Fundacion Jala. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+version = "1.1.10"
+
+/*
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            if (plugins.hasPlugin('war')) {
+                from components.web
+            } else {
+                from components.java
+            }
+            artifact sourcesJar
+        }
+    }
+}*/
+
+bintray {
+    user = "ruiz-ac"
+    key = "50d4486188d0dd9580d3cc8b64c7488f4a156e0b"
+
+    publications = ['mavenJava']
+         filesSpec {
+          from 'target/enforce-jenkins-plugin.hpi'
+          into 'org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.5'
+          //rename '(.+)\\.(.+)', '$1-suffix.$2'
+        }
+    dryRun = false
+    publish = true
+    pkg {
+        repo = bintray_repo
+        userOrg = bintray_user_org
+        name = bintray_package
+        websiteUrl = 'https://github.com/fundacionjala/enforce-gradle-plugin'
+        issueTrackerUrl = 'https://github.com/fundacionjala/enforce-gradle-plugin/issues'
+        vcsUrl = 'https://github.com/fundacionjala/enforce-gradle-plugin.git'
+        licenses = ['MIT']
+        labels = ['sfdc', 'integration ', 'continuous', 'jenkins', 'gradle']
+        publicDownloadNumbers = true
+    }
+}
