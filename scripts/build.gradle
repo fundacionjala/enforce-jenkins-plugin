@@ -36,6 +36,8 @@ version = "1.1.10"
 def hpi = new File('target/enforce-jenkins-plugin.hpi')
 if(hpi.exists()){
     println hpi.absolutePath + " exists"
+}else{
+    println "$hpi.absolutePath doesn't exists"
 }
 /*
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -66,7 +68,7 @@ bintray {
 
     publications = ['mavenJava']
          filesSpec {
-          from '../target/enforce-jenkins-plugin.hpi'
+          from 'target/enforce-jenkins-plugin.hpi'
           into 'org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.5'
           //rename '(.+)\\.(.+)', '$1-suffix.$2'
         }
