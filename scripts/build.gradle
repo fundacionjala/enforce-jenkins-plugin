@@ -68,7 +68,7 @@ bintray {
 
     publications = ['mavenJava']
          filesSpec {
-          from 'target/enforce-jenkins-plugin.hpi'
+          from '../target/enforce-jenkins-plugin.hpi'
           into 'org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.5'
           //rename '(.+)\\.(.+)', '$1-suffix.$2'
         }
