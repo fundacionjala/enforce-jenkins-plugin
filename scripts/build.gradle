@@ -22,16 +22,6 @@ buildscript {
     }
 }
 
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
-}
-
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
 def major = "$System.env.VERSION_NUMBER_MAJOR"
 def minor = "$System.env.VERSION_NUMBER_MINOR"
 def patch = "$System.env.VERSION_NUMBER_PATCH"
