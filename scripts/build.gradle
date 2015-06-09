@@ -32,41 +32,20 @@ repositories {
     jcenter()
 }
 
+def major = "$System.env.VERSION_NUMBER_MAJOR"
+def minor = "$System.env.VERSION_NUMBER_MINOR"
+def patch = "$System.env.VERSION_NUMBER_PATCH"
+def newVersion = "$major.$minor.$patch"
 
-version = "1.0.5"
+version = newVersion
 def hpi = new File('target/enforce-jenkins-plugin.hpi')
 if(hpi.exists()){
     println hpi.absolutePath + " exists"
 }else{
     println "$hpi.absolutePath doesn't exists"
 }
-/*
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
 
-artifacts {
-    archives sourcesJar
-}
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            if (plugins.hasPlugin('war')) {
-                from components.web
-            } else {
-                from components.java
-            }
-            artifact sourcesJar
-        }
-    }
-}*/
-
-def major = "$System.env.VERSION_NUMBER_MAJOR"
-def minor = "$System.env.VERSION_NUMBER_MINOR"
-def patch = "$System.env.VERSION_NUMBER_PATCH"
-def newVersion = "$major.$minor.$patch"
 String hpiPath = jenkins_hpi_path
 def hpiFile = new File(hpiPath)
 bintray {
