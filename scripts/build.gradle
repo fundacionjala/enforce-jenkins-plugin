@@ -28,14 +28,6 @@ def patch = "$System.env.VERSION_NUMBER_PATCH"
 def newVersion = "$major.$minor.$patch"
 
 version = newVersion
-def hpi = new File('target/enforce-jenkins-plugin.hpi')
-if(hpi.exists()){
-    println hpi.absolutePath + " exists"
-}else{
-    println "$hpi.absolutePath doesn't exists"
-}
-
-
 String hpiPath = jenkins_hpi_path
 def hpiFile = new File(hpiPath)
 bintray {
