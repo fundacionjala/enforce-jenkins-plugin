@@ -28,6 +28,7 @@ def patch = "$System.env.VERSION_NUMBER_PATCH"
 def newVersion = "$major.$minor.$patch"
 
 version = newVersion
+
 String hpiPath = jenkins_hpi_path
 def hpiFile = new File(hpiPath)
 bintray {
