@@ -15,7 +15,7 @@ The plugin will generate:
   * Acceptable (80% - 94%)
   * Safe(95% - 100%)
 
-The EnForce jenkins plugin can be downloaded [here](https://bintray.com/artifact/download/fundacionjala/enforce/org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.2/enforce-jenkins-plugin.hpi).
+The EnForce jenkins plugin can be downloaded [here](https://bintray.com/artifact/download/fundacionjala/enforce/org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.3/enforce-jenkins-plugin.hpi).
 
 # Prerequisites
 
@@ -34,7 +34,7 @@ This plugin is a good fit for generating code coverage information of your Sales
 # Installation
 
 * Install the plugin in Jenkins.
-    * The plugin is hosted on the [Bintray repository](https://bintray.com/artifact/download/fundacionjala/enforce/org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.2/enforce-jenkins-plugin.hpi)
+    * The plugin is hosted on the [Bintray repository](https://bintray.com/artifact/download/fundacionjala/enforce/org/fundacionjala/gradle/plugins/enforce/enforce-gradle-plugin/1.0.3/enforce-jenkins-plugin.hpi)
     * Go to ``Jenkins`` -> ``Manage Plugins`` -> ``Advanced``
     * Search section ``Upload Plugin``
     * Choose ``enforce-jenkins-plugin.hpi`` file   
