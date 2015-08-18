@@ -51,4 +51,26 @@ This plugin is a good fit for generating code coverage information of your Sales
     * Set ``Coverage JSON file name``   
     * Set ``Minimum coverage percentage``   
 
+# Token Macros
 
+The following macros are provided to be integrated to any other plugin(E.G. [Email-ext plugin](https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin) )
+that consumes [Token Macro Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Token+Macro+Plugin) infrastructure.
+
+- ENFORCE_COVERAGE_RESULT
+- ENFORCE_COVERAGE_STATUS
+- ENFORCE_TEST_RESULT
+
+*Usage*
+
+They are able to be used within a expression definition.
+E.G. It is default email content for [Email-ext plugin](https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin)
+
+```java
+$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+$ENFORCE_COVERAGE_RESULT
+$ENFORCE_COVERAGE_STATUS
+$ENFORCE_TEST_RESULT
+
+Check console output at $BUILD_URL to view the results.
+```
