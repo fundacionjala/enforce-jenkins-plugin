@@ -5,6 +5,7 @@
 
 package org.fundacionjala.jenkins.plugins.enforce;
 
+import hudson.EnvVars;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.*;
@@ -12,12 +13,19 @@ import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
+import hudson.tasks.test.AbstractTestResultAction;
+import hudson.tasks.test.TestResult;
 import net.sf.json.JSONObject;
+import org.jenkinsci.plugins.tokenmacro.DataBoundTokenMacro;
+import org.jenkinsci.plugins.tokenmacro.MacroEvaluationException;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents the post build Enforce that run after the build is completed.
@@ -26,6 +34,7 @@ public class EnforcePublisher extends Recorder {
 
     private final String jsonFileName;
     private final float minimumCoverage;
+    private PieChartData pieChartData;
 
     @Extension
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
@@ -45,6 +54,30 @@ public class EnforcePublisher extends Recorder {
         return minimumCoverage;
     }
 
+    public PieChartData getPieChartData(AbstractBuild<?, ?> build, TaskListener listener) {
+        return this.getPieChartData(build, listener, null);
+    }
+
+    public PieChartData getPieChartData(AbstractBuild<?, ?> build, TaskListener listener, StringBuilder message) {
+        if (null == this.pieChartData) {
+            try {
+                String jsonFilePath = Paths.get(build.getWorkspace().toURI()).resolve(jsonFileName).toString();
+                if (!new File(jsonFilePath).exists()) {
+                    String msg = jsonFilePath + " was not found";
+                    listener.getLogger().println(msg);
+                    if (null != message) {
+                        message.append(msg);
+                    }
+                }
+                pieChartData = PieChartData.newInstance(jsonFilePath);
+            } catch (Exception exception) {
+                build.setResult(Result.FAILURE);
+                exception.printStackTrace(listener.fatalError("Unable to find coverage data"));
+            }
+        }
+        return this.pieChartData;
+    }
+
     /**
      * Runs the step over the given build and reports the progress to the listener.
      *
@@ -56,20 +89,8 @@ public class EnforcePublisher extends Recorder {
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) {
         StringBuilder message = new StringBuilder();
         listener.getLogger().println(message.append("Minimum Coverage:").append(minimumCoverage).append("%"));
-        String jsonFilePath = "";
-        PieChartData pieChartData = null;
-
-        try {
-            jsonFilePath = Paths.get(build.getWorkspace().toURI()).resolve(jsonFileName).toString();
-            message = new StringBuilder();
-            if (!new File(jsonFilePath).exists()) {
-                listener.getLogger().println(message.append(jsonFilePath).append(" was not found"));
-                return true;
-            }
-            pieChartData = PieChartData.newInstance(jsonFilePath);
-        } catch (Exception exception) {
-            build.setResult(Result.FAILURE);
-            exception.printStackTrace(listener.fatalError("Unable to find coverage data"));
+        if (null == this.getPieChartData(build, listener, message)) {
+            return true;
         }
         double coveragePercentage = pieChartData != null ? pieChartData.getRoundedPercentage(2) : 0;
         if (pieChartData != null && pieChartData.coverageDataExists() && coveragePercentage < minimumCoverage) {

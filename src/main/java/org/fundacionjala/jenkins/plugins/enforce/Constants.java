@@ -21,4 +21,7 @@ public class Constants {
     public static final int DATA_COLUMNS = 2;
     public static final int DATA_ROWS = 5;
     public static final int COVERAGE_DATA_ROWS = 3;
+    public static final String ENFORCE_COVERAGE_RESULT = "ENFORCE_COVERAGE_RESULT";
+    public static final String ENFORCE_COVERAGE_STATUS = "ENFORCE_COVERAGE_STATUS";
+    public static final String ENFORCE_TEST_RESULT = "ENFORCE_TEST_RESULT";
 }

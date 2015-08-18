@@ -67,13 +67,43 @@ public class PieChartData {
         return percentage;
     }
 
+    public String getCoveragePercentStatus() {
+        double coveragePercent = this.getPercentage();
+        String status = null;
+        if (coveragePercent < 75) {
+            status = "Danger";
+        } else if (coveragePercent < 80) {
+            status = "Risk";
+        } else if (coveragePercent < 75) {
+            status = "Danger";
+        } else if (coveragePercent < 95) {
+            status = "Acceptable";
+        } else {
+            status = "Safe";
+        }
+        return status;
+    }
+
+    public String getFileCoverageStatus() {
+        StringBuilder result = new StringBuilder();
+        for (Integer i = 1; i < this.data.length; i++) {
+            if (null != this.data[i]) {
+                result.append(this.data[i][0]);
+                result.append(" = ");
+                result.append(Double.valueOf(String.valueOf(this.data[i][1])).intValue());
+                result.append(" files. ");
+            }
+        }
+        return result.toString();
+    }
+
     /**
      * Verifies if there are coverage data
      *
      * @return True if there are coverage data
      */
     public boolean coverageDataExists() {
-        return coverageData.length == Constants.COVERAGE_DATA_ROWS && coverageData[0].length == Constants.DATA_COLUMNS;
+        return null != coverageData && coverageData.length == Constants.COVERAGE_DATA_ROWS && coverageData[0].length == Constants.DATA_COLUMNS;
     }
 
     /**
@@ -82,7 +112,7 @@ public class PieChartData {
      * @return True if there are coverage data
      */
     public boolean dataExists() {
-        return data.length == Constants.DATA_ROWS && coverageData[0].length == Constants.DATA_COLUMNS;
+        return null != data && data.length == Constants.DATA_ROWS && coverageData[0].length == Constants.DATA_COLUMNS;
     }
 
     /**
