@@ -63,7 +63,7 @@ that consumes [Token Macro Plugin](https://wiki.jenkins-ci.org/display/JENKINS/T
 *Usage*
 
 They are able to be used within a expression definition.
-E.G. It is default email content for [Email-ext plugin](https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin)
+E.G. It is a default email content for [Email-ext plugin](https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin)
 
 ```java
 $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
