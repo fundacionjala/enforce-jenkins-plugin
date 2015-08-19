@@ -6,8 +6,6 @@ import hudson.model.TaskListener;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.tasks.test.TestResult;
 import org.fundacionjala.jenkins.plugins.enforce.Constants;
-import org.fundacionjala.jenkins.plugins.enforce.EnforcePublisher;
-import org.fundacionjala.jenkins.plugins.enforce.PieChartData;
 import org.jenkinsci.plugins.tokenmacro.DataBoundTokenMacro;
 import org.jenkinsci.plugins.tokenmacro.MacroEvaluationException;
 
@@ -34,8 +32,8 @@ public class EnforceTestResultTokenMacro extends DataBoundTokenMacro {
                 for (TestResult testResultItem : testResultContainer.getFailedTests()) {
                     processedUnitTests++;
                     testResult.append("\n").append(testResultItem.getFullName());
-                    testResult.append("\n\tMessage: ").append(testResultItem.getErrorDetails());
-                    testResult.append("\n\tStacktrace: ").append(testResultItem.getErrorStackTrace());
+                    testResult.append("\n\tError Message:\n\t\t").append(testResultItem.getErrorDetails());
+                    testResult.append("\n\tStandard Error:\n\t\t").append(testResultItem.getStderr());
                     if (processedUnitTests < failedUnitTests) {
                         testResult.append("\n");
                     }
