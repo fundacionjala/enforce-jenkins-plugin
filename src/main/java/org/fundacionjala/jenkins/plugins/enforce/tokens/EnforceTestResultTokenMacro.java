@@ -27,13 +27,13 @@ public class EnforceTestResultTokenMacro extends DataBoundTokenMacro {
             testResult.append(testResultDescription);
             Integer failedUnitTests = testResultContainer.getFailedTests().size();
             if (failedUnitTests > 0) {
-                testResult.append("\nFailures");
+                testResult.append("\n\nFailures:");
                 Integer processedUnitTests = 0;
                 for (TestResult testResultItem : testResultContainer.getFailedTests()) {
                     processedUnitTests++;
-                    testResult.append("\n").append(testResultItem.getFullName());
-                    testResult.append("\n\tError Message:\n\t\t").append(testResultItem.getErrorDetails());
-                    testResult.append("\n\tStandard Error:\n\t\t").append(testResultItem.getStderr());
+                    testResult.append("\n\t").append(testResultItem.getFullName());
+                    testResult.append("\n\t\tMessage: ").append(testResultItem.getErrorDetails());
+                    testResult.append("\n\t\tStacktrace: ").append(testResultItem.getStderr());
                     if (processedUnitTests < failedUnitTests) {
                         testResult.append("\n");
                     }
