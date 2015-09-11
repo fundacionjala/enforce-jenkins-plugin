@@ -32,10 +32,10 @@ public class EnforceTestResultTokenMacro extends DataBoundTokenMacro {
                 for (TestResult testResultItem : testResultContainer.getFailedTests()) {
                     testResult.append(Constants.LINE_SEPARATOR).append("\n").append(testResultItem.getFullName());
                     if ((null != testResultItem.getErrorDetails()) && !testResultItem.getErrorDetails().trim().isEmpty()) {
-                        testResult.append("\n-------- Message --------\n").append(testResultItem.getErrorDetails());
+                        testResult.append("\n-------- Message --------\n").append(testResultItem.getErrorDetails().trim());
                     }
                     if ((null != testResultItem.getStderr()) && !testResultItem.getStderr().trim().isEmpty()) {
-                        testResult.append("\n-------- Stacktrace --------\n").append(testResultItem.getStderr());
+                        testResult.append("\n-------- Stacktrace --------\n").append(testResultItem.getStderr().trim());
                     }
                     processedUnitTests++;
                     if (processedUnitTests.equals(failedUnitTests)) {
