@@ -27,15 +27,19 @@ public class EnforceTestResultTokenMacro extends DataBoundTokenMacro {
             testResult.append(testResultDescription);
             Integer failedUnitTests = testResultContainer.getFailedTests().size();
             if (failedUnitTests > 0) {
-                testResult.append("\n\nFailures:");
+                testResult.append("\nFailures:");
                 Integer processedUnitTests = 0;
                 for (TestResult testResultItem : testResultContainer.getFailedTests()) {
+                    testResult.append(Constants.LINE_SEPARATOR).append("\n").append(testResultItem.getFullName());
+                    if ((null != testResultItem.getErrorDetails()) && !testResultItem.getErrorDetails().trim().isEmpty()) {
+                        testResult.append("\n-------- Message --------\n").append(testResultItem.getErrorDetails());
+                    }
+                    if ((null != testResultItem.getStderr()) && !testResultItem.getStderr().trim().isEmpty()) {
+                        testResult.append("\n-------- Stacktrace --------\n").append(testResultItem.getStderr());
+                    }
                     processedUnitTests++;
-                    testResult.append("\n\t").append(testResultItem.getFullName());
-                    testResult.append("\n\t\tMessage: ").append(testResultItem.getErrorDetails());
-                    testResult.append("\n\t\tStacktrace: ").append(testResultItem.getStderr());
-                    if (processedUnitTests < failedUnitTests) {
-                        testResult.append("\n");
+                    if (processedUnitTests.equals(failedUnitTests)) {
+                        testResult.append(Constants.LINE_SEPARATOR);
                     }
                 }
             }

@@ -24,4 +24,6 @@ public class Constants {
     public static final String ENFORCE_COVERAGE_RESULT = "ENFORCE_COVERAGE_RESULT";
     public static final String ENFORCE_COVERAGE_STATUS = "ENFORCE_COVERAGE_STATUS";
     public static final String ENFORCE_TEST_RESULT = "ENFORCE_TEST_RESULT";
+    public static final String SEPARATOR = "___________________________________________";
+    public static final String LINE_SEPARATOR = "\n" + SEPARATOR;
 }
